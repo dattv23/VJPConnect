@@ -1,36 +1,14 @@
-import { useEffect } from 'react';
-import { ActivityIndicator, Text, View } from 'react-native';
-import { useQuery } from '@tanstack/react-query';
+import { Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { CommonActions } from '@react-navigation/native';
 
 import { useTheme } from '@/theme';
-import { Brand } from '@/components/molecules';
 import { SafeScreen } from '@/components/template';
 
 import type { RootScreenProps } from '@/types/navigation';
 
-function Startup({ navigation }: RootScreenProps<'Startup'>) {
+function Home({ navigation }: RootScreenProps<'Home'>) {
 	const { layout, gutters, fonts } = useTheme();
 	const { t } = useTranslation(['home']);
-
-	const { isSuccess, isFetching, isError } = useQuery({
-		queryKey: ['startup'],
-		queryFn: () => {
-			return Promise.resolve(true);
-		},
-	});
-
-	useEffect(() => {
-		if (isSuccess) {
-			navigation.dispatch(
-				CommonActions.reset({
-					index: 0,
-					routes: [{ name: 'Example' }],
-				}),
-			);
-		}
-	}, [isSuccess]);
 
 	return (
 		<SafeScreen>
@@ -42,18 +20,10 @@ function Startup({ navigation }: RootScreenProps<'Startup'>) {
 					layout.justifyCenter,
 				]}
 			>
-				<Brand />
-				{isFetching && (
-					<ActivityIndicator size="large" style={[gutters.marginVertical_24]} />
-				)}
-				{isError && (
-					<Text style={[fonts.size_16, fonts.red500]}>
-						{t('home:title')}
-					</Text>
-				)}
+				<Text style={[fonts.size_16, fonts.red500]}>{t('home:title')}</Text>
 			</View>
 		</SafeScreen>
 	);
 }
 
-export default Startup;
+export default Home;
