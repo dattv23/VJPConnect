@@ -20,15 +20,24 @@ function Startup({ navigation }: RootScreenProps<'Startup'>) {
 				  NativeModules.SettingsManager.settings.AppleLanguages[0] //iOS 13
 				: NativeModules.I18nManager.localeIdentifier;
 		i18n.changeLanguage(deviceLanguage.split('-')[0]);
-		const timeout = setTimeout(() => {
+    
+		const loading = async () => {
+			await new Promise(resolve => {
+				setTimeout(resolve, 3000); 
+			});
+		};
+
+		const performStartup = async () => {
+			await loading();
 			navigation.dispatch(
 				CommonActions.reset({
 					index: 0,
 					routes: [{ name: 'Home' }],
 				}),
 			);
-		}, 3000);
-		clearTimeout(timeout);
+		};
+
+		performStartup();
 	}, []);
 
 	return (

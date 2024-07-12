@@ -1,10 +1,6 @@
-import { View, DimensionValue } from 'react-native';
+import { View, DimensionValue, Image } from 'react-native';
 
-const Logo = require('@/theme/assets/images/logovjpc.png');
-
-import { ImageVariant } from '@/components/atoms';
 import { useTheme } from '@/theme';
-import { isImageSourcePropType } from '@/types/guards/image';
 
 type Props = {
 	height?: DimensionValue;
@@ -15,15 +11,11 @@ type Props = {
 function Brand({ height = 200, width = 200, mode = 'contain' }: Props) {
 	const { layout } = useTheme();
 
-	if (!isImageSourcePropType(Logo)) {
-		throw new Error('Image source is not valid');
-	}
-
 	return (
 		<View testID="brand-img-wrapper" style={{ height, width }}>
-			<ImageVariant
+			<Image
 				style={[layout.fullHeight, layout.fullWidth]}
-				source={Logo}
+				source={require('@/assets/images/logovjpc.png')}
 				resizeMode={mode}
 			/>
 		</View>
