@@ -17,17 +17,17 @@ function ApplicationNavigator() {
 		<SafeAreaProvider>
 			<NavigationContainer theme={navigationTheme}>
 				<Tab.Navigator
-					initialRouteName="Home Page"
+					initialRouteName="Home Screen"
 					screenOptions={params => {
 						return {
 							headerShown: false,
 						};
 					}}
 				>
-					<Tab.Screen name="Home Page" component={HomeStackScreen}></Tab.Screen>
-					<Tab.Screen name="Search" component={SearchStackScreen}></Tab.Screen>
-					<Tab.Screen name="Deals" component={DealsStackScreen}></Tab.Screen>
-					<Tab.Screen name="FAQ" component={FAQStackScreen}></Tab.Screen>
+					<Tab.Screen name="Home Screen" component={HomeStackScreen}></Tab.Screen>
+					<Tab.Screen name="Search Screen" component={SearchStackScreen}></Tab.Screen>
+					<Tab.Screen name="Deals Screen" component={DealsStackScreen}></Tab.Screen>
+					<Tab.Screen name="FAQ Screen" component={FAQStackScreen}></Tab.Screen>
 				</Tab.Navigator>
 			</NavigationContainer>
 		</SafeAreaProvider>
