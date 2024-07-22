@@ -1,12 +1,14 @@
-import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { useTheme } from '@/theme';
-import { Home, Startup } from '@/screens'
-import type { RootStackParamList } from '@/types/navigation';
+import FAQStackScreen from '@/navigators/stacks/FAQStack';
+import HomeStackScreen from '@/navigators/stacks/HomeStack';
+import DealsStackScreen from '@/navigators/stacks/DealsStack';
+import SearchStackScreen from '@/navigators/stacks/SearchStack';
 
-const Stack = createStackNavigator<RootStackParamList>();
+const Tab = createBottomTabNavigator();
 
 function ApplicationNavigator() {
 	const { variant, navigationTheme } = useTheme();
@@ -14,10 +16,19 @@ function ApplicationNavigator() {
 	return (
 		<SafeAreaProvider>
 			<NavigationContainer theme={navigationTheme}>
-				<Stack.Navigator key={variant} screenOptions={{ headerShown: false }}>
-					<Stack.Screen name="Startup" component={Startup} />
-					<Stack.Screen name="Home" component={Home} />
-				</Stack.Navigator>
+				<Tab.Navigator
+					initialRouteName="Home Page"
+					screenOptions={params => {
+						return {
+							headerShown: false,
+						};
+					}}
+				>
+					<Tab.Screen name="Home Page" component={HomeStackScreen}></Tab.Screen>
+					<Tab.Screen name="Search" component={SearchStackScreen}></Tab.Screen>
+					<Tab.Screen name="Deals" component={DealsStackScreen}></Tab.Screen>
+					<Tab.Screen name="FAQ" component={FAQStackScreen}></Tab.Screen>
+				</Tab.Navigator>
 			</NavigationContainer>
 		</SafeAreaProvider>
 	);
